@@ -3,9 +3,10 @@ import {useEffect, useState} from 'react'
 const { DateTime } = require('luxon');
 
 export default function Calculator(){
- 
 
-const [nowInNY, setNowInNY] = useState(DateTime.local({zone: "America/New_York"}));
+const now = DateTime.local({zone: "America/New_York"}) 
+
+const [nowInNY, setNowInNY] = useState(now);
 
 const startOfWeek = nowInNY.startOf('week');
 const WED = 3;
@@ -49,11 +50,11 @@ if (timeDiff.days > 0) {
 
 useEffect(() => {
     const interval = setInterval(() => {
-        setNowInNY(DateTime.local({zone: "America/New_York"}));
+        setNowInNY(now);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [now]);
 
     return timeDiffFormatted
 }
