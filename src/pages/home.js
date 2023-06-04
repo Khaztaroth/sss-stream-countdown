@@ -1,20 +1,8 @@
-import { useEffect, useState } from "react";
 import Calculator from "../hooks/timer";
 
 import '../styles/styles.css'
 import '../files/LOGO.png'
 export default function Home() {
-
-    const [isDesktop, setDesktop] = useState(window.innerWidth > 1450)
-
-    const updateMedia = () => {
-        setDesktop(window.innerWidth > 1450)
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', updateMedia);
-        return () => window.removeEventListener('resize', updateMedia)
-    })
 
     const linkProperties = {
         target: "blank",
