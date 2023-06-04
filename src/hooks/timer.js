@@ -4,9 +4,7 @@ const { DateTime } = require('luxon');
 
 export default function Calculator(){
 
-const now = DateTime.local({zone: "America/New_York"}) 
-
-const [nowInNY, setNowInNY] = useState(now);
+const [nowInNY, setNowInNY] = useState(DateTime.local({zone: "America/New_York"}));
 
 const startOfWeek = nowInNY.startOf('week');
 const WED = 3;
@@ -16,7 +14,7 @@ const daysToSUN = (SUN - startOfWeek.weekday + 7 ) %7;
 
 const nextWEDStream = startOfWeek.plus({days: daysToWED});
 const nextSUNStream = startOfWeek.plus({days: daysToSUN});
-
+// 
 var YEAR
 var MONTH
 var DAY
@@ -31,7 +29,7 @@ if (nextWEDStream >= nowInNY) {
     DAY = nextSUNStream.toFormat('dd')
 }
 
-var nextStream = DateTime.fromFormat(`${MONTH}/${DAY}/${YEAR}, 9:00 PM`, 'f');
+var nextStream = DateTime.fromFormat(`${MONTH}/${DAY}/${YEAR}, 9:00 PM`, 'f', {zone: "America/New_York"});
 var timeDiff = nextStream.diff(nowInNY)
 
 var timeDiffFormatted
@@ -50,11 +48,11 @@ if (timeDiff.days > 0) {
 
 useEffect(() => {
     const interval = setInterval(() => {
-        setNowInNY(now);
+        setNowInNY(DateTime.local({zone: "America/New_York"}));
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [now]);
+  }, []);
 
     return timeDiffFormatted
 }
