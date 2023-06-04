@@ -31,7 +31,7 @@ if (nextWEDStream >= nowInNY) {
     DAY = nextSUNStream.toFormat('dd')
 }
 
-var nextStream = DateTime.fromFormat(`${MONTH}/${DAY}/${YEAR}, 9:00 PM`, 'f');
+var nextStream = DateTime.fromFormat(`${MONTH}/${DAY}/${YEAR}, 9:00 PM`, 'f', {zone: "America/New_York"});
 var timeDiff = nextStream.diff(nowInNY)
 
 var timeDiffFormatted
