@@ -11,8 +11,7 @@ export default function Home() {
 
 return (
         <div className="wrapper">
-            <div className="bgImg">
-            </div>
+            <div className="bgImg"></div>
             <h2 className="title">
                 Stream in:
             </h2>
@@ -21,7 +20,7 @@ return (
             </div>
             <div className="stream_url">
             <a href="https://www.twitch.tv/secretsleepoversociety" {...linkProperties} title="Secret Sleepover Society Twitch Page">twitch.tv/<br/>secretsleepoversociety</a>
-            </div>  
+            </div> 
             <div className="footer">
                 <a href="https://twitter.com/floabcomic" {...linkProperties} title="Jacob's twitter profile">@FLoaBComic</a> || 
                 <a href="https://twitter.com/julialepetit" {...linkProperties} title="Julia's twitter profile">@JuliaLepetit</a> || 
