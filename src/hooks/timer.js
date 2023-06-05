@@ -29,22 +29,36 @@ if (nextWEDStream >= nowInNY) {
     DAY = nextSUNStream.toFormat('dd')
 }
 
-var nextStream = DateTime.fromFormat(`${MONTH}/${DAY}/${YEAR}, 9:00 PM`, 'f', {zone: "America/New_York"});
-var timeDiff = nextStream.diff(nowInNY)
+const nextStream = DateTime.fromFormat(`${MONTH}/${DAY}/${YEAR}, 9:00 PM`, 'f', {zone: "America/New_York"});
+const timeDiff = nextStream.diff(nowInNY)
 
 var timeDiffFormatted
-if (timeDiff.days > 0) {
+
+if (timeDiff.as('days') > 1) {
     timeDiffFormatted = timeDiff.toFormat(
-    `dd'${timeDiff.days === 1 ? 'day' : 'days'}'
-    hh'${timeDiff.hours === 1 ? 'hour' : 'hours'} 
-    mm'${timeDiff.minutes === 1 ? 'minute' : 'minutes'} 
-    ss'${timeDiff.seconds === 1 ? 'second' : 'seconds'}' `
-    )
-} else timeDiffFormatted = timeDiff.toFormat(
-    `hh'${timeDiff.hours === 1 ? 'hour' : 'hours'}'
-    mm'${timeDiff.minutes === 1 ? 'minute' : 'minutes'}'
-    ss'${timeDiff.seconds === 1 ? 'second' : 'seconds'}' `
-    )
+        `dd'${timeDiff.days === 1 ? 'day' : 'days'}'
+        hh'${timeDiff.hours === 1 ? 'hour' : 'hours'}'
+        mm'${timeDiff.minutes === 1 ? 'minute' : 'minutes'}'
+        ss'${timeDiff.seconds === 1 ? 'second' : 'seconds'}' `
+        )
+} else if (timeDiff.as('hours') > 1) {
+    timeDiffFormatted = timeDiff.toFormat(
+        `hh'${timeDiff.hours === 1 ? 'hour' : 'hours'}'
+        mm'${timeDiff.minutes === 1 ? 'minute' : 'minutes'}'
+        ss'${timeDiff.seconds === 1 ? 'second' : 'seconds'}' `
+        )
+} else if (timeDiff.as('minutes') > 1) {
+    timeDiffFormatted = timeDiff.toFormat(
+        `mm'${timeDiff.minutes === 1 ? 'minute' : 'minutes'}'
+        ss'${timeDiff.seconds === 1 ? 'second' : 'seconds'}' `
+        )
+} else if (timeDiff.as('seconds') > 1) {
+    timeDiffFormatted = timeDiff.toFormat(
+        `ss'${timeDiff.seconds === 1 ? 'second' : 'seconds'}' `
+        )
+} else if (timeDiff.as('hours') < 0 && timeDiff.as('hours') > -2) {
+    timeDiffFormatted = "Stream happening now! (probably)"
+} else timeDiffFormatted = "Stream just ended (probably)"
 
 useEffect(() => {
     const interval = setInterval(() => {
