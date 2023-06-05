@@ -30,33 +30,32 @@ if (nextWEDStream >= nowInNY) {
 }
 
 const nextStream = DateTime.fromFormat(`${MONTH}/${DAY}/${YEAR}, 9:00 PM`, 'f', {zone: "America/New_York"});
-const timeDiff = nextStream.diff(nowInNY)
+const timeDiff = nextStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
 
 var timeDiffFormatted
-
-if (timeDiff.as('days') > 1) {
+if (timeDiff.days > 0) {
     timeDiffFormatted = timeDiff.toFormat(
-        `dd'${timeDiff.days === 1 ? 'day' : 'days'}'
-        hh'${timeDiff.hours === 1 ? 'hour' : 'hours'}'
-        mm'${timeDiff.minutes === 1 ? 'minute' : 'minutes'}'
-        ss'${timeDiff.seconds === 1 ? 'second' : 'seconds'}' `
+        `d'${timeDiff.days === 1 ? 'day' : 'days'}'
+        h'${timeDiff.hours === 1 ? 'hour' : 'hours'}'
+        m'${timeDiff.minutes === 1 ? 'minute' : 'minutes'}'
+        s'${timeDiff.seconds < 2 ? 'second' : 'seconds'}' `
         )
-} else if (timeDiff.as('hours') > 1) {
+} else if (timeDiff.hours > 0) {
     timeDiffFormatted = timeDiff.toFormat(
-        `hh'${timeDiff.hours === 1 ? 'hour' : 'hours'}'
-        mm'${timeDiff.minutes === 1 ? 'minute' : 'minutes'}'
-        ss'${timeDiff.seconds === 1 ? 'second' : 'seconds'}' `
+        `h'${timeDiff.hours === 1 ? 'hour' : 'hours'}'
+        m'${timeDiff.minutes === 1 ? 'minute' : 'minutes'}'
+        s'${timeDiff.seconds < 2 ? 'second' : 'seconds'}' `
         )
-} else if (timeDiff.as('minutes') > 1) {
+} else if (timeDiff.minutes > 0) {
     timeDiffFormatted = timeDiff.toFormat(
-        `mm'${timeDiff.minutes === 1 ? 'minute' : 'minutes'}'
-        ss'${timeDiff.seconds === 1 ? 'second' : 'seconds'}' `
+        `m'${timeDiff.minutes === 1 ? 'minute' : 'minutes'}'
+        s'${timeDiff.seconds < 2 ? 'second' : 'seconds'}' `
         )
-} else if (timeDiff.as('seconds') > 1) {
+} else if (timeDiff.seconds > 0) {
     timeDiffFormatted = timeDiff.toFormat(
-        `ss'${timeDiff.seconds === 1 ? 'second' : 'seconds'}' `
+        `s'${timeDiff.seconds < 1 ? 'second' : 'seconds'}' `
         )
-} else if (timeDiff.as('hours') < 0 && timeDiff.as('hours') > -2) {
+} else if (timeDiff.hours < 0 && timeDiff.hours > -2) {
     timeDiffFormatted = "Stream happening now! (probably)"
 } else timeDiffFormatted = "Stream just ended (probably)"
 
