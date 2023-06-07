@@ -15,14 +15,11 @@ const daysToSUN = (SUN - startOfWeek.weekday + 7 ) %7;
 const nextWEDStream = startOfWeek.plus({days: daysToWED});
 const nextSUNStream = startOfWeek.plus({days: daysToSUN});
 
-// console.log("next wed:", nextWEDStream, "next sun:", nextSUNStream)
-// console.log("next wed:", nextWEDStream.year, nextWEDStream.month, nextWEDStream.day, "next sun:", nextSUNStream.year, nextSUNStream.month, nextSUNStream.day,)
-
 var YEAR
 var MONTH
 var DAY
 
-if (nextWEDStream >= nowInNY) {
+if (nextWEDStream >= nowInNY.day) {
     YEAR = nextWEDStream.year
     MONTH = nextWEDStream.month
     DAY = nextWEDStream.day
