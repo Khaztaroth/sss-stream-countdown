@@ -11,9 +11,9 @@ export default function Home() {
 return (
         <div className="wrapper">
             <div className="bgImg"></div>
-            <div className="title">
+            <h2 className="title">
                 Stream in:
-            </div>
+            </h2>
             <div className="timer">
                 {timer()}
             </div>
