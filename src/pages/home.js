@@ -1,6 +1,7 @@
 import '../styles/styles.css'
 import '../files/LOGO.png'
 import { timer } from '../hooks/useTimer'
+import Calculator from '../hooks/useCalculate'
 export default function Home() {
 
     const linkProperties = {
@@ -8,14 +9,17 @@ export default function Home() {
         rel: "noreferrer"
     }
 
+const time = timer();
+const special = Calculator()
+
 return (
         <div className="wrapper">
             <div className="bgImg"></div>
             <h2 className="title">
-                Stream in:
+                {special ? "Special Stream in:" : "Stream in:"}
             </h2>
             <div className="timer">
-                {timer()}
+                {time}
             </div>
             <div className="stream_url">
             <a href="https://www.twitch.tv/secretsleepoversociety" {...linkProperties} title="Secret Sleepover Society Twitch Page">twitch.tv/<br/>secretsleepoversociety</a>

@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from 'react'
+import {useEffect, useState} from 'react'
 
 const { DateTime } = require('luxon');
 
@@ -21,24 +21,30 @@ const specialStream = DateTime.fromFormat(`06/07/2023, 7:00 PM`, 'f', inNY);
 
 const timeUntilWedStream = nextWedDate.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
 const timeUntilSunStream = nextSunDate.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
-const timeUntiolSpecialStream = specialStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
+const timeUntilSpecialStream = specialStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
 
 
-const nextRegularStream = useMemo(() => {
-    if (timeUntilWedStream.hours >= -2) {
-        return timeUntilWedStream
-    } else {
-        return timeUntilSunStream
+    function nextRegularStream() {
+        if (timeUntilWedStream.hours >= -2) {
+            return timeUntilWedStream;
+        } else {
+            return timeUntilSunStream;
+        }
     }
-})
 
-const timeDiff = useMemo(() => {
-    if (timeUntiolSpecialStream.hours >= -4) {
-        return timeUntiolSpecialStream
-    } else {
-        return nextRegularStream
+    function isSpecial() {
+        if (timeUntilSpecialStream.hours >= -4) {
+            return true
+        } else return false
     }
-})
+
+    function timeDiff() {
+        if (timeUntilSpecialStream.hours >= -4) {
+            return timeUntilSpecialStream;
+        } else {
+            return nextRegularStream();
+        }
+    }
 
 useEffect(() => {
     const interval = setInterval(() => {
@@ -46,7 +52,7 @@ useEffect(() => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+    }); 
 
-    return timeDiff
+    return [timeDiff(), isSpecial()]
 }

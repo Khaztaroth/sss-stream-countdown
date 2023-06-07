@@ -1,7 +1,7 @@
 import Calculator from "./useCalculate"
 
 export const timer = () => {
-    const timeDiff = Calculator()
+    const [timeDiff, special] = Calculator()
 
     if (timeDiff.days > 0) {
         return (
