@@ -12,33 +12,31 @@ const SUN = 7;
 const daysToWED = (WED - startOfWeek.weekday + 7 ) %7;
 const daysToSUN = (SUN - startOfWeek.weekday + 7 ) %7;
 
-const nextWEDStream = startOfWeek.plus({days: daysToWED});
-const nextSUNStream = startOfWeek.plus({days: daysToSUN});
+const nextWED = startOfWeek.plus({days: daysToWED});
+const nextSUN = startOfWeek.plus({days: daysToSUN});
 
-var YEAR
-var MONTH
-var DAY
+const nextWedDate = DateTime.fromFormat(`${nextWED.month}/${nextWED.day}/${nextWED.year}, 9:00 PM`, 'f', {zone: "America/New_York"});
+const nextSunDate = DateTime.fromFormat(`${nextSUN.month}/${nextSUN.day}/${nextSUN.year}, 9:00 PM`, 'f', {zone: "America/New_York"});
+const specialStream = DateTime.fromFormat(`06/07/2023, 7:00 PM`, 'f', {zone: "America/New_York"});
 
-if (nextWEDStream >= nowInNY.day) {
-    YEAR = nextWEDStream.year
-    MONTH = nextWEDStream.month
-    DAY = nextWEDStream.day
+const timeUntilWedStream = nextWedDate.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
+const timeUntilSunStream = nextSunDate.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
+const timeUntiolSpecialStream = specialStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
+
+
+var nextRegularStream
+if (timeUntilWedStream.hours >= -2) {
+    nextRegularStream = timeUntilWedStream
 } else {
-    YEAR = nextSUNStream.year
-    MONTH = nextSUNStream.month
-    DAY = nextSUNStream.day
+    nextRegularStream = timeUntilSunStream
 }
 
-const specialStream = DateTime.fromFormat(`06/07/2023, 7:00 PM`, 'f', {zone: "America/New_York"});
-const regularStream = DateTime.fromFormat(`${MONTH}/${DAY}/${YEAR}, 9:00 PM`, 'f', {zone: "America/New_York"});
-
-const specialDiff = specialStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
-const regularDiff = regularStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
-
 var timeDiff
-if (specialDiff.hours >= -2) {
-    timeDiff = specialDiff
-} else timeDiff = regularDiff
+if (timeUntiolSpecialStream.hours >= -4) {
+    timeDiff = timeUntiolSpecialStream
+} else {
+    timeDiff = nextRegularStream
+}
 
 var timeDiffFormatted
 if (timeDiff.days > 0) {
@@ -63,9 +61,7 @@ if (timeDiff.days > 0) {
     timeDiffFormatted = timeDiff.toFormat(
         `s'${timeDiff.seconds < 1 ? 'second' : 'seconds'}' `
         )
-} else if (timeDiff.hours < 0 && timeDiff.hours > -2) {
-    timeDiffFormatted = "Stream happening now! (probably)"
-} else timeDiffFormatted = "Stream just ended (probably)"
+} else timeDiffFormatted = 'Stream happening now!'
 
 useEffect(() => {
     const interval = setInterval(() => {
@@ -78,7 +74,7 @@ useEffect(() => {
     return (
         <div>
             <h2 className="title">
-            {specialDiff.hours >= -2 ? 'Special Stream in:' : 'Stream in:'}
+            {timeUntiolSpecialStream.hours >= -4 ? 'Special Stream in:' : 'Stream in:'}
             </h2>
             <div className="timer">
                 {timeDiffFormatted}
