@@ -14,23 +14,34 @@ const daysToSUN = (SUN - startOfWeek.weekday + 7 ) %7;
 
 const nextWEDStream = startOfWeek.plus({days: daysToWED});
 const nextSUNStream = startOfWeek.plus({days: daysToSUN});
-// 
+
+// console.log("next wed:", nextWEDStream, "next sun:", nextSUNStream)
+console.log("next wed:", nextWEDStream.year, nextWEDStream.month, nextWEDStream.day, "next sun:", nextSUNStream.year, nextSUNStream.month, nextSUNStream.day,)
+
 var YEAR
 var MONTH
 var DAY
 
 if (nextWEDStream >= nowInNY) {
-    YEAR = nextWEDStream.toFormat('yyyy')
-    MONTH = nextWEDStream.toFormat('MM')
-    DAY = nextWEDStream.toFormat('dd')
+    YEAR = nextWEDStream.year
+    MONTH = nextWEDStream.month
+    DAY = nextWEDStream.day
 } else {
-    YEAR = nextSUNStream.toFormat('yyyy')
-    MONTH = nextSUNStream.toFormat('MM')
-    DAY = nextSUNStream.toFormat('dd')
+    YEAR = nextSUNStream.year
+    MONTH = nextSUNStream.month
+    DAY = nextSUNStream.day
 }
 
-const nextStream = DateTime.fromFormat(`${MONTH}/${DAY}/${YEAR}, 9:00 PM`, 'f', {zone: "America/New_York"});
-const timeDiff = nextStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
+const specialStream = DateTime.fromFormat(`06/07/2023, 7:00 PM`, 'f', {zone: "America/New_York"});
+const regularStream = DateTime.fromFormat(`${MONTH}/${DAY}/${YEAR}, 9:00 PM`, 'f', {zone: "America/New_York"});
+
+const specialDiff = specialStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
+const regularDiff = regularStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
+
+var timeDiff
+if (specialDiff.hours >= -2) {
+    timeDiff = specialDiff
+} else timeDiff = regularDiff
 
 var timeDiffFormatted
 if (timeDiff.days > 0) {
@@ -67,5 +78,14 @@ useEffect(() => {
     return () => clearInterval(interval);
   }, []);
 
-    return timeDiffFormatted
+    return (
+        <div>
+            <h2 className="title">
+            {specialDiff.hours >= -2 ? 'Special Stream in:' : 'Stream in:'}
+            </h2>
+            <div className="timer">
+                {timeDiffFormatted}
+            </div>
+        </div>
+    )
 }

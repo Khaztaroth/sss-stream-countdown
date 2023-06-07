@@ -12,10 +12,7 @@ export default function Home() {
 return (
         <div className="wrapper">
             <div className="bgImg"></div>
-            <h2 className="title">
-                Stream in:
-            </h2>
-            <div className="timer">
+            <div>
                 <Calculator />
             </div>
             <div className="stream_url">
