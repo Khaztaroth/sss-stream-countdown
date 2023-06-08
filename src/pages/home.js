@@ -1,6 +1,6 @@
 import '../styles/styles.css'
 import '../files/LOGO.png'
-import { useTimer } from '../hooks/useTimer'
+import { useFormatter } from '../hooks/useTimer'
 import { useGame, useLive, useTitle } from '../hooks/useChannelData'
 import useCalculator from '../hooks/useCounter'
 
@@ -11,8 +11,8 @@ export default function Home() {
         rel: "noreferrer"
     }
 
-const time = useTimer();
 const [timeLeft, isSpecial] = useCalculator();
+const time = useFormatter(timeLeft);
 const title = useTitle();
 const isLive = useLive();
 const game = useGame();

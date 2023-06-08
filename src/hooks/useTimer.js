@@ -1,8 +1,7 @@
 import Calculator from "./useCounter"
 
-export function useTimer(){
-    const [timeDiff] = Calculator();
-
+export function useFormatter(timeDiff){
+    
     if (timeDiff.days > 0) {
         return (
             timeDiff.toFormat(
