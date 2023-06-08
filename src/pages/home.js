@@ -12,7 +12,7 @@ export default function Home() {
     }
 
 const time = useTimer();
-const special = useCalculator();
+const [timeLeft, isSpecial] = useCalculator();
 const title = useTitle();
 const isLive = useLive();
 const game = useGame();
@@ -21,7 +21,7 @@ return (
         <div className="wrapper">
             <div className="bgImg"></div>
             <h2 className="title">
-                {isLive ? `${title}` : special ? "Special stream in:" : "Stream in:"}
+                {isLive ? `${title}` : isSpecial ? "Special stream in:" : "Stream in:"}
             </h2>
             <div className="timer">
                 {isLive ? `Come watch us play ${game}` : time}

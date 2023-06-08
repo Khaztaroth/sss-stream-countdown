@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 
+const channel = 'secretsleepoversociety'
+
 export function useLive() {
     const [isLive, setIsLive] = useState(true)
     
     useEffect(() => {
-        fetch('https://decapi.me/twitch/uptime/secretsleepoversociety')
+        fetch(`https://decapi.me/twitch/uptime/${channel}`)
         .then((res) => res.text())
         .then((data) => {
             if (data.includes('offline')){
@@ -23,7 +25,7 @@ export function useTitle() {
     const [title, setTitle] = useState('')
     
     useEffect(() => {
-        fetch('https://decapi.me/twitch/status/secretsleepoversociety')
+        fetch(`https://decapi.me/twitch/status/${channel}`)
         .then((res) => res.text())
         .then((data) => {
             setTitle(data)
@@ -40,7 +42,7 @@ export function useGame() {
     const [game, setGame] = useState('')
     
     useEffect(() => {
-        fetch('https://decapi.me/twitch/game/secretsleepoversociety')
+        fetch(`https://decapi.me/twitch/game/${channel}`)
         .then((res) => res.text())
         .then((data) => {
             setGame(data)
