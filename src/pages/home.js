@@ -1,8 +1,8 @@
 import '../styles/styles.css'
 import '../files/LOGO.png'
-import Calculator from '../hooks/useCalculate'
 import { useTimer } from '../hooks/useTimer'
 import { useGame, useLive, useTitle } from '../hooks/useChannelData'
+import useCalculator from '../hooks/useCounter'
 
 export default function Home() {
 
@@ -12,9 +12,10 @@ export default function Home() {
     }
 
 const time = useTimer();
-const special = Calculator();
+const special = useCalculator();
 const title = useTitle();
 const isLive = useLive();
+const game = useGame();
 
 return (
         <div className="wrapper">
@@ -23,7 +24,7 @@ return (
                 {isLive ? `${title}` : special ? "Special stream in:" : "Stream in:"}
             </h2>
             <div className="timer">
-                {time}
+                {isLive ? `Come watch us play ${game}` : time}
             </div>
             <div className="stream_url">
             <a href="https://www.twitch.tv/secretsleepoversociety" {...linkProperties} title="Secret Sleepover Society Twitch Page">twitch.tv/<br/>secretsleepoversociety</a>

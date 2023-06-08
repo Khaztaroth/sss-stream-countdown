@@ -1,10 +1,7 @@
-import { useGame, useLive } from "./useChannelData";
-import Calculator from "./useCalculate"
+import Calculator from "./useCounter"
 
 export function useTimer(){
     const [timeDiff] = Calculator();
-    const isLive = useLive();
-    const game = useGame();
 
     if (timeDiff.days > 0) {
         return (
@@ -37,6 +34,6 @@ export function useTimer(){
                 )
         )
     } else {
-     return (isLive ? `Come watch us play ${game}` : "Stream ended" )
+     return ("Stream ended" )
     }
 }

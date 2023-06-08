@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 
 const { DateTime } = require('luxon');
 
-export default function Calculator(){
+export default function useCalculator(){
 
 const inNY = {zone: "America/New_York"}
 const [nowInNY, setNowInNY] = useState(DateTime.local(inNY));
@@ -24,7 +24,7 @@ const timeUntilSunStream = nextSunDate.diff(nowInNY, ['days', 'hours', 'minutes'
 const timeUntilSpecialStream = specialStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
 
     function nextRegularStream() {
-        if (timeUntilWedStream.hours >= -2) {
+        if (timeUntilWedStream.hours > 0) {
             return timeUntilWedStream;
         } else {
             return timeUntilSunStream;
@@ -32,13 +32,13 @@ const timeUntilSpecialStream = specialStream.diff(nowInNY, ['days', 'hours', 'mi
     }
 
     function isSpecial() {
-        if (timeUntilSpecialStream.hours >= -4) {
+        if (timeUntilSpecialStream.hours > 0) {
             return true
         } else return false
     }
 
     function timeDiff() {
-        if (timeUntilSpecialStream.hours >= -4) {
+        if (timeUntilSpecialStream.hours > 0) {
             return timeUntilSpecialStream;
         } else {
             return nextRegularStream();
