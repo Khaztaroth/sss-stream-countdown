@@ -1,7 +1,9 @@
+import { useLive } from "./useChannelData";
 import Calculator from "./useCalculate"
 
-export const timer = () => {
-    const [timeDiff] = Calculator()
+export function useTimer(){
+    const [timeDiff] = Calculator();
+    const isLive = useLive();
 
     if (timeDiff.days > 0) {
         return (
@@ -34,6 +36,6 @@ export const timer = () => {
                 )
         )
     } else {
-     return ('Stream happening now!')
+     return (isLive ? "Come watch us live!" : "Stream ended" )
     }
 }

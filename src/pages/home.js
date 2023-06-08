@@ -1,7 +1,9 @@
 import '../styles/styles.css'
 import '../files/LOGO.png'
-import { timer } from '../hooks/useTimer'
 import Calculator from '../hooks/useCalculate'
+import { useTimer } from '../hooks/useTimer'
+import { useLive, useTitle } from '../hooks/useChannelData'
+
 export default function Home() {
 
     const linkProperties = {
@@ -9,14 +11,16 @@ export default function Home() {
         rel: "noreferrer"
     }
 
-const time = timer();
-const special = Calculator()
+const time = useTimer();
+const special = Calculator();
+const title = useTitle();
+const isLive = useLive();
 
 return (
         <div className="wrapper">
             <div className="bgImg"></div>
             <h2 className="title">
-                {special ? "Special Stream in:" : "Stream in:"}
+                {isLive ? `${title}` : special ? "Special stream in:" : "Stream in:"}
             </h2>
             <div className="timer">
                 {time}

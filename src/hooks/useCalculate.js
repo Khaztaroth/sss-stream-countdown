@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import { useLive } from './useChannelData';
 
 const { DateTime } = require('luxon');
 
@@ -23,9 +24,11 @@ const timeUntilWedStream = nextWedDate.diff(nowInNY, ['days', 'hours', 'minutes'
 const timeUntilSunStream = nextSunDate.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
 const timeUntilSpecialStream = specialStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
 
+const isLive = useLive();
+
 
     function nextRegularStream() {
-        if (timeUntilWedStream.hours >= -2) {
+        if (timeUntilWedStream.hours >= -2 && isLive) {
             return timeUntilWedStream;
         } else {
             return timeUntilSunStream;
@@ -33,7 +36,7 @@ const timeUntilSpecialStream = specialStream.diff(nowInNY, ['days', 'hours', 'mi
     }
 
     function isSpecial() {
-        if (timeUntilSpecialStream.hours >= -4) {
+        if (timeUntilSpecialStream.hours >= -4 && isLive ) {
             return true
         } else return false
     }
