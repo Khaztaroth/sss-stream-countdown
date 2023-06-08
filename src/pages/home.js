@@ -2,7 +2,7 @@ import '../styles/styles.css'
 import '../files/LOGO.png'
 import Calculator from '../hooks/useCalculate'
 import { useTimer } from '../hooks/useTimer'
-import { useLive, useTitle } from '../hooks/useChannelData'
+import { useGame, useLive, useTitle } from '../hooks/useChannelData'
 
 export default function Home() {
 

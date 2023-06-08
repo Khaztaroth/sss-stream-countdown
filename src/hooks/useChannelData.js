@@ -35,3 +35,20 @@ export function useTitle() {
     
     return title
 }
+
+export function useGame() {
+    const [game, setGame] = useState('')
+    
+    useEffect(() => {
+        fetch('https://decapi.me/twitch/game/secretsleepoversociety')
+        .then((res) => res.text())
+        .then((data) => {
+            setGame(data)
+        })
+        .catch((err) => {
+            console.log(err.message)
+        })
+    }, [])
+    
+    return game
+}
