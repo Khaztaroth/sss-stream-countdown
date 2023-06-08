@@ -1,5 +1,3 @@
-import Calculator from "./useCounter"
-
 export function useFormatter(timeDiff){
     
     if (timeDiff.days > 0) {
