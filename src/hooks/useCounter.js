@@ -46,31 +46,26 @@ export function useTimeTicker(){
             special: nextStreamDate.special.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
         }
 
-        function nextRegularStream() {
-            if (timeUntilStream.wed.hours > 0) {
-                return timeUntilStream.wed;
-            } else if (timeUntilStream.sun > 0){
-                return timeUntilStream.sun;
+        function nextStream() {
+            if (timeUntilStream.special.hours > 0) {
+                return [timeUntilStream.special, nextStreamDate.special];
+            } else if (timeUntilStream.wed.hours > 0) {
+                return [timeUntilStream.wed, nextStreamDate.wed];
+            } else if (timeUntilStream.sun.hours > 0){
+                return [timeUntilStream.sun, nextStreamDate.sun];
             } else {
-                return (timeUntilStream.nextWed)
+                return [timeUntilStream.nextWed, nextStreamDate.nextWed];
             }
-        }
+        };
         
         function isSpecial() {
             if (timeUntilStream.special.hours > 0) {
                 return true
             } else return false
-        }
-        
-        function timeDiff() {
-            if (timeUntilStream.special.hours > 0) {
-                return timeUntilStream.special;
-            } else {
-                return nextRegularStream();
-            }
-        }
+        };
+    
 
-        return [isSpecial(), timeDiff()]
+        return [isSpecial(), nextStream()]
 }
 
 

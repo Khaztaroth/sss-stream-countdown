@@ -12,10 +12,37 @@ export default function Home() {
     }
 
 const [isSpecial, timeLeft] = useTimeTicker();
-const time = useFormatter(timeLeft);
-const title = useTitle();
+const time = useFormatter(timeLeft[0]);
+const streamTitle = useTitle();
 const isLive = useLive();
 const game = useGame();
+
+const [title, setTitle] = useState('')
+const [timer, setTimer] = useState('')
+
+function updateTitle() {
+    if (isLive) {
+        return streamTitle
+    } else if (isSpecial) {
+        return (<span>Special stream on: <br/> {timeLeft[1].toFormat("DDD 'at' t ZZZZ")}</span>);
+    } else return (<span>Stream on: <br/> {timeLeft[1].toFormat("DDD 'at' t ZZZZ")}</span>)
+}
+
+function updateTimer() {
+    if (isLive) {
+        return (`Come watch us play ${game}`)
+    } else return (time)
+}
+
+useEffect(() => {
+    const interval = setInterval(() => {
+        setTitle(updateTitle());
+        setTimer(updateTimer());
+    }, 1000);
+
+    return () => clearInterval(interval);
+    }); 
+
 
 return (
         <div className="wrapper">
