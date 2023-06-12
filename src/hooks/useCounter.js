@@ -52,7 +52,7 @@ export function useTimeTicker(){
             } else if (timeUntilStream.sun > 0){
                 return timeUntilStream.sun;
             } else {
-                return (timeUntilStream.nextWed)
+                return timeUntilStream.nextWed;
             }
         }
         
