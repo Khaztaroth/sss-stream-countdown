@@ -3,6 +3,7 @@ import '../files/LOGO.png'
 import { useFormatter } from '../hooks/useTimer'
 import { useGame, useLive, useTitle } from '../hooks/useChannelData'
 import { useTimeTicker } from '../hooks/useCounter'
+import { useEffect, useState } from 'react'
 
 
 export default function Home() {
@@ -48,10 +49,10 @@ return (
         <div className="wrapper">
             <div className="bgImg"></div>
             <h2 className="title">
-                {isLive ? `${title}` : isSpecial ? "Special stream in:" : "Stream in:"}
+                {title}
             </h2>
             <div className="timer">
-                {isLive ? `Come watch us play ${game}` : time}
+                {timer}
             </div>
             <div className="stream_url">
             <a href="https://www.twitch.tv/secretsleepoversociety" {...linkProperties} title="Secret Sleepover Society Twitch Page">twitch.tv/<br/>secretsleepoversociety</a>
