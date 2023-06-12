@@ -48,13 +48,25 @@ export function useTimeTicker(){
 
         function nextStream() {
             if (timeUntilStream.special.hours > 0) {
-                return [timeUntilStream.special, nextStreamDate.special];
+                return {
+                    time: timeUntilStream.special, 
+                    date: nextStreamDate.special,
+                };
             } else if (timeUntilStream.wed.hours > 0) {
-                return [timeUntilStream.wed, nextStreamDate.wed];
+                return {
+                    time: timeUntilStream.wed, 
+                    date: nextStreamDate.wed,
+                };
             } else if (timeUntilStream.sun.hours > 0){
-                return [timeUntilStream.sun, nextStreamDate.sun];
+                return {
+                    time: timeUntilStream.sun, 
+                    date: nextStreamDate.sun,
+                };
             } else {
-                return [timeUntilStream.nextWed, nextStreamDate.nextWed];
+                return {
+                    time: timeUntilStream.nextWed, 
+                    date: nextStreamDate.nextWed,
+                };
             }
         };
         
