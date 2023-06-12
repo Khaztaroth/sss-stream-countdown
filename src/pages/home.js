@@ -2,6 +2,8 @@ import '../styles/styles.css'
 import '../files/LOGO.png'
 import { useFormatter } from '../hooks/useTimer'
 import { useGame, useLive, useTitle } from '../hooks/useChannelData'
+import { useTimeTicker } from '../hooks/useCounter'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
     const linkProperties = {
@@ -34,7 +36,6 @@ function updateTimer() {
 
 useEffect(() => {
     const interval = setInterval(() => {
-        console.log('updated info')
         setTitle(updateTitle());
         setTimer(updateTimer());
     }, 1000);
