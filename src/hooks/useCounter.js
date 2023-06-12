@@ -19,9 +19,9 @@ const nextWedDate = DateTime.fromFormat(`${nextWED.month}/${nextWED.day}/${nextW
 const nextSunDate = DateTime.fromFormat(`${nextSUN.month}/${nextSUN.day}/${nextSUN.year}, 9:00 PM`, 'f', inNY);
 const specialStream = DateTime.fromFormat(`06/07/2023, 7:00 PM`, 'f', inNY);
 
-const timeUntilWedStream = nextWedDate.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
-const timeUntilSunStream = nextSunDate.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
-const timeUntilSpecialStream = specialStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
+const timeUntilWedStream = nextWedDate.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']);
+const timeUntilSunStream = nextSunDate.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']);
+const timeUntilSpecialStream = specialStream.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']);
 
     function nextRegularStream() {
         if (timeUntilWedStream.hours > 0) {
@@ -29,13 +29,13 @@ const timeUntilSpecialStream = specialStream.diff(nowInNY, ['days', 'hours', 'mi
         } else {
             return timeUntilSunStream;
         }
-    }
+    };
 
     function isSpecial() {
         if (timeUntilSpecialStream.hours > 0) {
             return true
         } else return false
-    }
+    };
 
     function timeDiff() {
         if (timeUntilSpecialStream.hours > 0) {
@@ -43,7 +43,7 @@ const timeUntilSpecialStream = specialStream.diff(nowInNY, ['days', 'hours', 'mi
         } else {
             return nextRegularStream();
         }
-    }
+    };
 
 useEffect(() => {
     const interval = setInterval(() => {

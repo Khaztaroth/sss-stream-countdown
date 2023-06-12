@@ -48,7 +48,7 @@ html {
     }
     .title {
         font-family: 'd-din_condensedregular', sans-serif;
-        font-size: 18vmin;
+        font-size: 4rem;
         color: rgb(255,255,255);
         text-shadow:black 0px 0px 20px;
     }

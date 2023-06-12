@@ -3,6 +3,7 @@ import '../files/LOGO.png'
 import { useFormatter } from '../hooks/useTimer'
 import { useGame, useLive, useTitle } from '../hooks/useChannelData'
 import useCalculator from '../hooks/useCounter'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
 
@@ -13,18 +14,46 @@ export default function Home() {
 
 const [timeLeft, isSpecial] = useCalculator();
 const time = useFormatter(timeLeft);
-const title = useTitle();
+const streamTitle = useTitle();
 const isLive = useLive();
 const game = useGame();
+
+const [title, setTitle] = useState('')
+const [timer, setTimer] = useState('')
+
+function updateTitle() {
+    if (isLive) {
+        return streamTitle
+    } else if (isSpecial) {
+        return ('Special stream in');
+    } else return ('Stream in:')
+}
+
+function updateTimer() {
+    if (isLive) {
+        return (`Come watch us play ${game}`)
+    } else return (time)
+}
+
+useEffect(() => {
+    const interval = setInterval(() => {
+        console.log('updated info')
+        setTitle(updateTitle());
+        setTimer(updateTimer());
+    }, 1000);
+
+    return () => clearInterval(interval);
+    }); 
+
 
 return (
         <div className="wrapper">
             <div className="bgImg"></div>
             <h2 className="title">
-                {isLive ? `${title}` : isSpecial ? "Special stream in:" : "Stream in:"}
+                {title}
             </h2>
             <div className="timer">
-                {isLive ? `Come watch us play ${game}` : time}
+                {timer}
             </div>
             <div className="stream_url">
             <a href="https://www.twitch.tv/secretsleepoversociety" {...linkProperties} title="Secret Sleepover Society Twitch Page">twitch.tv/<br/>secretsleepoversociety</a>
