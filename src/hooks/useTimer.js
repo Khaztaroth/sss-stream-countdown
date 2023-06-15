@@ -31,6 +31,6 @@ export function useFormatter(timeDiff){
                 )
         )
     } else {
-     return ("Stream ended, come back later" )
+     return ("Stream ended/is happening" )
     }
 }
