@@ -47,9 +47,9 @@ export function useTimeTicker(){
         }
 
         function nextRegularStream() {
-            if (timeUntilStream.wed.hours > 0) {
+            if (timeUntilStream.wed.hours > -1) {
                 return timeUntilStream.wed;
-            } else if (timeUntilStream.sun > 0){
+            } else if (timeUntilStream.sun > -1){
                 return timeUntilStream.sun;
             } else {
                 return timeUntilStream.nextWed;
