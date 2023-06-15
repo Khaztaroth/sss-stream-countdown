@@ -24,112 +24,146 @@ a {
     color: inherit;
     text-decoration: none;
 }
-html {
-    margin: 2vmin;
-    min-height: 90%;
-    border: 0.5vmin solid rgb(255,255,255);
+.wrapper {
+    min-height: 90vh;
+
+    margin: 0.5rem;
+    border: 0.3rem solid rgb(255,255,255);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (orientation: portrait){
     .bgImg {
-        background-image: url(../files/LOGO.png);
-        background-repeat: no-repeat;
-        background-position: 50%;
-        background-size: 80%;
-    
-        opacity: 15%;
-        z-index: -1;
-    
-        position: fixed;
         width: 100%;
         height: 100%;
-        bottom: 0px;
-        left: 0px;
-    }
-    .timer {
-        height: 100%;
-        font-family: 'd-din_condenseddinCnBd', sans-serif;
-        font-size: 3.5rem;
-        color: rgb(255,255,255);
-        text-shadow:black 0px 10px 10px;
-    }
-    .title {
-        height: 100%;
-        font-family: 'd-din_condensedregular', sans-serif;
-        font-size: 3rem;
-        color: rgb(255,255,255);
-        text-shadow:black 0px 0px 20px;
-    }
-    .stream_url {
-        height: 100%;
-        font-size: 2.2rem;
-        margin: 10px;
-        margin-top: 50px;
-        color: white;
-    }
-    .footer {   
-        position: fixed;
-        bottom: 0.5rem;
-        left:0%;
-        margin-top: 5rem;
-        height: 1.5rem;
-        line-height: 1.5rem;
-        width:100%;
-        background:rgb(165, 52, 77);
+        left: 0;
+        top: 0;
 
-        vertical-align: middle;
-        font-size: 1rem;
-    }
-}
-@media (orientation: landscape) {
-    .bgImg {
+        position: fixed;
+        z-index: -1;
+
         background-image: url(../files/LOGO.png);
         background-repeat: no-repeat;
-        background-position: 50%;
-        background-size: 40%;
+        background-position-x: 50%;
+        background-position-y: 50%;
+        background-size: 50%;
+
     
         opacity: 15%;
-        z-index: -1;
-    
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        bottom: 0px;
-        left: 0px;
     }
     .timer {
-        height: 100%;
-        margin-top: 3rem;
-        margin-bottom: 2rem;
+        font-size: calc(5rem - 80%);
+
+        padding: 3%;
+        
         font-family: 'd-din_condenseddinCnBd', sans-serif;
-        font-size: 7rem;
         color: rgb(255,255,255);
         text-shadow:black 0px 10px 10px;
     }
+    .timer span {
+        font-size: calc(6rem - 80%);
+    }
     .title {
-        height: 100%;
-        margin-top: 4rem;
+        font-size: calc(5rem - 80%);
+
+        padding-top: 3%;
+        padding-bottom: 3%;
+
         font-family: 'd-din_condensedregular', sans-serif;
-        font-size: 6rem;
         color: rgb(255,255,255);
         text-shadow:black 0px 0px 20px;
     }
+    .title span {
+        font-size: calc(7rem - 80%);
+    }
     .stream_url {
-        height: 100%;
-        font-size: 4rem;
-        margin: 10px;
-        margin-top: 50px;
+        font-size: calc(3rem - 80%);
+        overflow-wrap: break-word;
+
+        padding: 5%;
+
         color: white;
     }
     .footer {
-        position: fixed;
-        bottom: 0.5rem;
-        left:0%;
+        font-size:calc(2rem - 80%);
         height:2.5rem;
+        width: 100%;
         line-height: 2.5rem;
-        width:100%;
-        background:rgb(165, 52, 77);
 
+        position: relative;
+        margin-top: 1rem;
+        bottom: 0;
+        left:0;
+
+        background:rgb(165, 52, 77);
+        vertical-align: middle;
+    }
+}
+
+@media (orientation: landscape) {
+    .bgImg {
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+
+        position: fixed;
+        z-index: -1;
+
+        background-image: url(../files/LOGO.png);
+        background-repeat: no-repeat;
+        background-position-x: 50%;
+        background-position-y: 50%;
+        background-size: 50%;
+
+    
+        opacity: 15%;
+    }
+    .timer {
+        font-size: calc(10rem - 80%);
+
+        font-family: 'd-din_condenseddinCnBd', sans-serif;
+        color: rgb(255,255,255);
+        text-shadow:black 0px 10px 10px;
+    }
+    .timer span {
+        font-size: calc(12rem - 80%);
+    }
+    .title {
+        font-size: calc(8rem - 80%);
+
+        font-family: 'd-din_condensedregular', sans-serif;
+        color: rgb(255,255,255);
+        text-shadow:black 0px 0px 20px;
+    }
+    .title span {
+        font-size: calc(6rem - 20px);
+    }
+    .stream_url {
+        font-size: calc(7rem - 40px);
+        inline-size: calc(100vw - 10rem);
+
+        padding-top: 3%;
+        padding-bottom: 3%;
+        
+        overflow-wrap: break-word;
+        color: white;
+    }
+    .footer {
+        height:2.5rem;
+        width: 100%;
+        line-height: 2.5rem;
+
+        position: relative;
+        margin-top: 1rem;
+        bottom: 0;
+        left:0;
+
+        background:rgb(165, 52, 77);
         vertical-align: middle;
         font-size: 1.5rem;
     }

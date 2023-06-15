@@ -6,7 +6,7 @@ export function useFormatter(timeDiff){
                 `d'${timeDiff.days === 1 ? 'day' : 'days'}'
                 h'${timeDiff.hours === 1 ? 'hour' : 'hours'}'
                 m'${timeDiff.minutes === 1 ? 'minute' : 'minutes'}'
-                s'${timeDiff.seconds < 2 ? 'second' : 'seconds'}' `
+                ss'${timeDiff.seconds < 2 ? 'second' : 'seconds'}' `
                 )
         )
     } else if (timeDiff.hours > 0) {

@@ -22,23 +22,17 @@ export function useTimeTicker(){
             sun:  (days.sun - startOfWeek.weekday + 7 ) %7,
             nextWed: (days.wed - startOfWeek.weekday + 21 ) %14,
         }
-        // console.log("DAY CALC:", nextDay.wed)
-
         const nextDate = {
             wed: startOfWeek.plus({days: nextDay.wed}),
             sun: startOfWeek.plus({days: nextDay.sun}),
             nextWed: startOfWeek.plus({days: nextDay.nextWed})
         }
-        // console.log("DATES:", nextDate)
-
         const nextStreamDate = {
             wed: DateTime.fromFormat(`${nextDate.wed.month}/${nextDate.wed.day}/${nextDate.wed.year}, 9:00 PM`, 'f', inNY),
             sun: DateTime.fromFormat(`${nextDate.sun.month}/${nextDate.sun.day}/${nextDate.sun.year}, 9:00 PM`, 'f', inNY),
             nextWed: DateTime.fromFormat(`${nextDate.nextWed.month}/${nextDate.nextWed.day}/${nextDate.nextWed.year}, 9:00 PM`, 'f', inNY),
             special:  DateTime.fromFormat(`06/07/2023, 7:00 PM`, 'f', inNY)
         }
-        // console.log("STREAM DATES:", nextStreamDate)
-
         const timeUntilStream = {
             wed: nextStreamDate.wed.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
             sun: nextStreamDate.sun.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
