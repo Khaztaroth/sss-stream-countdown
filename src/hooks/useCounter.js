@@ -47,9 +47,9 @@ export function useTimeTicker(){
         }
 
         function nextRegularStream() {
-            if (timeUntilStream.wed.hours > -1) {
+            if (timeUntilStream.wed.hours > -2) {
                 return timeUntilStream.wed;
-            } else if (timeUntilStream.sun > -1){
+            } else if (timeUntilStream.sun > -2){
                 return timeUntilStream.sun;
             } else {
                 return timeUntilStream.nextWed;
@@ -57,13 +57,13 @@ export function useTimeTicker(){
         }
         
         function isSpecial() {
-            if (timeUntilStream.special.hours > 0) {
+            if (timeUntilStream.special.hours > -2) {
                 return true
             } else return false
         }
         
         function timeDiff() {
-            if (timeUntilStream.special.hours > 0) {
+            if (timeUntilStream.special.hours > 2) {
                 return timeUntilStream.special;
             } else {
                 return nextRegularStream();
