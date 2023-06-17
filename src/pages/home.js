@@ -18,6 +18,9 @@ const streamTitle = useTitle();
 const isLive = useLive();
 const game = useGame();
 
+const localDate = stream.date.toLocal()
+
+
 const [title, setTitle] = useState('')
 const [timer, setTimer] = useState('')
 
@@ -25,8 +28,8 @@ function updateTitle() {
     if (isLive) {
         return streamTitle
     } else if (isSpecial) {
-        return (<div><span>on:</span><br/>{stream.date.toFormat("DDD 'at' t ZZZZ")}</div>);
-    } else return (<div><span>on:</span><br/>{stream.date.toFormat("DDD 'at' t ZZZZ")}</div>)
+        return (<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}</div>);
+    } else return (<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}</div>)
 }
 
 function updateTimer() {
