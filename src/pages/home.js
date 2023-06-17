@@ -28,8 +28,8 @@ function updateTitle() {
     if (isLive) {
         return streamTitle
     } else if (isSpecial) {
-        return (<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}</div>);
-    } else return (<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}</div>)
+        return (<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}<br/>(local time)</div>);
+    } else return (<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}<br/>(local time)</div>)
 }
 
 function updateTimer() {

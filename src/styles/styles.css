@@ -125,7 +125,8 @@ a {
         opacity: 15%;
     }
     .timer {
-        font-size: calc(10rem - 80%);
+        font-size: calc(9rem - 80%);
+        width: calc(100% - 6rem);
 
         font-family: 'd-din_condenseddinCnBd', sans-serif;
         color: rgb(255,255,255);
