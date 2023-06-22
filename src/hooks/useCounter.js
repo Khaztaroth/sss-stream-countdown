@@ -31,8 +31,9 @@ export function useTimeTicker(){
             wed: DateTime.fromFormat(`${nextDate.wed.month}/${nextDate.wed.day}/${nextDate.wed.year}, 9:00 PM`, 'f', inNY),
             sun: DateTime.fromFormat(`${nextDate.sun.month}/${nextDate.sun.day}/${nextDate.sun.year}, 9:00 PM`, 'f', inNY),
             nextWed: DateTime.fromFormat(`${nextDate.nextWed.month}/${nextDate.nextWed.day}/${nextDate.nextWed.year}, 9:00 PM`, 'f', inNY),
-            special:  DateTime.fromFormat(`06/07/2023, 7:00 PM`, 'f', inNY)
+            special:  DateTime.fromFormat(`06/07/2023, 9:00 PM`, 'f', inNY)
         }
+        // console.log(nextStreamDate)
         const timeUntilStream = {
             wed: nextStreamDate.wed.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
             sun: nextStreamDate.sun.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
@@ -41,17 +42,17 @@ export function useTimeTicker(){
         }
 
         function nextStream() {
-            if (timeUntilStream.special.hours > 0) {
+            if (timeUntilStream.special.hours > -1) {
                 return {
                     time: timeUntilStream.special, 
                     date: nextStreamDate.special,
                 };
-            } else if (timeUntilStream.wed.hours > 0) {
+            } else if (timeUntilStream.wed.hours > -1) {
                 return {
                     time: timeUntilStream.wed, 
                     date: nextStreamDate.wed,
                 };
-            } else if (timeUntilStream.sun.hours > 0){
+            } else if (timeUntilStream.sun.hours > -1){
                 return {
                     time: timeUntilStream.sun, 
                     date: nextStreamDate.sun,

@@ -27,7 +27,9 @@ export function useFormatter(timeDiff){
                 `s'${timeDiff.seconds < 1 ? 'second' : 'seconds'}' `
                 )
         )
+    } else  if (timeDiff.hours < 0 && timeDiff.hours > -2){
+     return ("Stream in progress come check us live!" )
     } else {
-     return ("Stream ended, come back later" )
+        return ("Stream ended, come back next time!")
     }
 }

@@ -26,7 +26,7 @@ const [timer, setTimer] = useState('')
 
 function updateTitle() {
     if (isLive) {
-        return streamTitle
+        return (`Come watch us play ${game}`)
     } else if (isSpecial) {
         return (<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}<br/>(local time)</div>);
     } else return (<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}<br/>(local time)</div>)
@@ -34,7 +34,7 @@ function updateTitle() {
 
 function updateTimer() {
     if (isLive) {
-        return (`Come watch us play ${game}`)
+        return (streamTitle)
     } else return (<div><span>Next stream is in:</span><br/>{time}</div>)
 }
 
