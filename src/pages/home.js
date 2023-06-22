@@ -28,8 +28,8 @@ function updateTitle() {
     if (isLive) {
         return (`Come watch us play ${game}`)
     } else if (isSpecial) {
-        return (<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}<br/>(local time)</div>);
-    } else return (<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}<br/>(local time)</div>)
+        return (<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}<br/><span>(local time)</span></div>);
+    } else return (<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}<br/><span>(local time)</span></div>)
 }
 
 function updateTimer() {
