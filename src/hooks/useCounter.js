@@ -22,23 +22,18 @@ export function useTimeTicker(){
             sun:  (days.sun - startOfWeek.weekday + 7 ) %7,
             nextWed: (days.wed - startOfWeek.weekday + 21 ) %14,
         }
-        // console.log("DAY CALC:", nextDay.wed)
-
         const nextDate = {
             wed: startOfWeek.plus({days: nextDay.wed}),
             sun: startOfWeek.plus({days: nextDay.sun}),
             nextWed: startOfWeek.plus({days: nextDay.nextWed})
         }
-        // console.log("DATES:", nextDate)
-
         const nextStreamDate = {
             wed: DateTime.fromFormat(`${nextDate.wed.month}/${nextDate.wed.day}/${nextDate.wed.year}, 9:00 PM`, 'f', inNY),
             sun: DateTime.fromFormat(`${nextDate.sun.month}/${nextDate.sun.day}/${nextDate.sun.year}, 9:00 PM`, 'f', inNY),
             nextWed: DateTime.fromFormat(`${nextDate.nextWed.month}/${nextDate.nextWed.day}/${nextDate.nextWed.year}, 9:00 PM`, 'f', inNY),
-            special:  DateTime.fromFormat(`06/07/2023, 7:00 PM`, 'f', inNY)
+            special:  DateTime.fromFormat(`06/07/2023, 9:00 PM`, 'f', inNY)
         }
-        // console.log("STREAM DATES:", nextStreamDate)
-
+        // console.log(nextStreamDate)
         const timeUntilStream = {
             wed: nextStreamDate.wed.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
             sun: nextStreamDate.sun.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
@@ -46,31 +41,38 @@ export function useTimeTicker(){
             special: nextStreamDate.special.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
         }
 
-        function nextRegularStream() {
-            if (timeUntilStream.wed.hours > -2) {
-                return timeUntilStream.wed;
-            } else if (timeUntilStream.sun > -2){
-                return timeUntilStream.sun;
+        function nextStream() {
+            if (timeUntilStream.special.hours > -1) {
+                return {
+                    time: timeUntilStream.special, 
+                    date: nextStreamDate.special,
+                };
+            } else if (timeUntilStream.wed.hours > -1) {
+                return {
+                    time: timeUntilStream.wed, 
+                    date: nextStreamDate.wed,
+                };
+            } else if (timeUntilStream.sun.hours > -1){
+                return {
+                    time: timeUntilStream.sun, 
+                    date: nextStreamDate.sun,
+                };
             } else {
-                return timeUntilStream.nextWed;
+                return {
+                    time: timeUntilStream.nextWed, 
+                    date: nextStreamDate.nextWed,
+                };
             }
-        }
+        };
         
         function isSpecial() {
             if (timeUntilStream.special.hours > -2) {
                 return true
             } else return false
-        }
-        
-        function timeDiff() {
-            if (timeUntilStream.special.hours > 2) {
-                return timeUntilStream.special;
-            } else {
-                return nextRegularStream();
-            }
-        }
+        };
+    
 
-        return [isSpecial(), timeDiff()]
+        return [isSpecial(), nextStream()]
 }
 
 
