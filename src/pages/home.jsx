@@ -45,7 +45,7 @@ useEffect(() => {
     }, 1000);
 
     return () => clearInterval(interval);
-    }); 
+    });
 
 return (
     <div>
