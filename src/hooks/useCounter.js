@@ -41,19 +41,19 @@ export function useTimeTicker(){
         }
 
         function nextStream() {
-            if (timeUntilStream.special.days >= 0 && timeUntilStream.special.hours >= -1) {
+            if (timeUntilStream.special.hours >= 24 && timeUntilStream.special.hours >= -1) {
                 return {
                     stream: 'Special stream',
                     time: timeUntilStream.special, 
                     date: nextStreamDate.special,
                 };
-            } else if (timeUntilStream.wed.days >= 0 && timeUntilStream.wed.hours >= -1) {
+            } else if (timeUntilStream.wed.hours <= 23 && timeUntilStream.wed.hours >= -1) {
                 return {
                     stream: 'Wednesday Stream',
                     time: timeUntilStream.wed, 
                     date: nextStreamDate.wed,
                 };
-            } else if (timeUntilStream.sun.days >= 0 && timeUntilStream.sun.hours >= -1){
+            } else if (timeUntilStream.sun.hours <= 23 && timeUntilStream.sun.hours >= -1){
                 return {
                     stream: 'Ssunday Stream',
                     time: timeUntilStream.sun, 
