@@ -53,12 +53,12 @@ export function useTimeTicker(){
                     time: timeUntilStream.wed, 
                     date: nextStreamDate.wed,
                 };
-            } else if (timeUntilStream.sun.hours <= 23 && timeUntilStream.sun.hours >= -1){
-                return {
-                    stream: 'Ssunday Stream',
-                    time: timeUntilStream.sun, 
-                    date: nextStreamDate.sun,
-                };
+            // } else if (timeUntilStream.sun.hours <= 23 && timeUntilStream.sun.hours >= -1){
+            //     return {
+            //         stream: 'Ssunday Stream',
+            //         time: timeUntilStream.sun, 
+            //         date: nextStreamDate.sun,
+            //     };
             } else {
                 return {
                     stream: 'Next Wednesday Stream',
