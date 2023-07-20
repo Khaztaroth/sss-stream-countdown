@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import { DaysStreaming } from './daysConfig'
 
 const { DateTime } = require('luxon');
 
@@ -47,18 +48,18 @@ export function useTimeTicker(){
                     time: timeUntilStream.special, 
                     date: nextStreamDate.special,
                 };
-            } else if (timeUntilStream.wed.hours <= 23 && timeUntilStream.wed.hours >= -1) {
+            } else if (timeUntilStream.wed.hours <= 23 && timeUntilStream.wed.hours >= -1 && DaysStreaming.WED === true ) {
                 return {
                     stream: 'Wednesday Stream',
                     time: timeUntilStream.wed, 
                     date: nextStreamDate.wed,
                 };
-            // } else if (timeUntilStream.sun.hours <= 23 && timeUntilStream.sun.hours >= -1){
-            //     return {
-            //         stream: 'Ssunday Stream',
-            //         time: timeUntilStream.sun, 
-            //         date: nextStreamDate.sun,
-            //     };
+            } else if (timeUntilStream.sun.hours <= 23 && timeUntilStream.sun.hours >= -1 && DaysStreaming.SUN === true ){
+                return {
+                    stream: 'Ssunday Stream',
+                    time: timeUntilStream.sun, 
+                    date: nextStreamDate.sun,
+                };
             } else {
                 return {
                     stream: 'Next Wednesday Stream',
