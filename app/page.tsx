@@ -32,19 +32,19 @@ export default function Counter() {
                 </span>
                 {time}
         </div>
-        <div className="text-center text-4xl font-dinRegular pb-2 md:text-5xl xl:text-7xl flex flex-grow-2" id="timer">
+        <div className="text-center text-4xl font-dinRegular pb-2 md:text-6xl xl:text-8xl flex flex-grow-2" id="localTimer">
         <span className="drop-shadow-close">
           {isLive? 
             `Come watch us play ${game}` : 
             <>on:<br/>{localTime.toFormat("LLL dd', at' t ZZZZ")}<br/>(local time)</>}
             </span>
         </div>
-        <div className="text-center font-dinRegular text-2xl pt-4 md:text-3xl xl:text-4xl flex flex-grow-2" id="twitchLink">
+        <div className="text-center font-dinRegular text-2xl pt-4 md:text-4xl xl:text-5xl flex flex-grow-2" id="twitchLink">
           <a className="drop-shadow-close" href="https://www.twitch.tv/secretsleepoversociety" {...linkProperties} title="Secret Sleepover Society Twitch Page">twitch.tv/<wbr/>secret<wbr/>sleepover<wbr/>society</a>
         </div>
       </div>
-      <div className="mt-auto xl:mt-0 w-full">
-      <footer className="text-center text-xs xl:text-lg font-dinRegular bg-accentRed text-black" id="footer">
+      <div className="mt-auto xl:mb-2 xl:mt-0 w-full">
+      <footer className="text-center text-base xl:text-2xl font-dinRegular bg-accentRed text-black" id="footer">
         <a href="https://twitter.com/floabcomic" {...linkProperties} title="Jacob's twitter profile"> @FLoaBComic</a> ||
         <a href="https://twitter.com/julialepetit" {...linkProperties} title="Julia's twitter profile"> @JuliaLepetit</a> ||
         <a href="https://twitter.com/sss_stream" {...linkProperties} title="SSS' twitter profile"> @sss_stream</a>
