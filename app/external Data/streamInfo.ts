@@ -1,5 +1,5 @@
 import NodeCache from "node-cache";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const channel = 'secretsleepoversociety';
@@ -10,30 +10,30 @@ export function useLive(): boolean{
     const cachedUptime: string | undefined = cache.get('uptime')
     
     async function uptimeData() {
-        if (cachedUptime === undefined) {
-            const res = await fetch(`https://decapi.me/twitch/uptime/${channel}`, {next: {revalidate: 300}})
-            if (!res.ok) {
-                throw new Error('Failed to fecth uptime data')
+            if (cachedUptime === undefined) {
+                const res = await fetch(`https://decapi.me/twitch/uptime/${channel}`, {next: {revalidate: 300}})
+                if (!res.ok) {
+                    throw new Error('Failed to fecth uptime data')
+                } else {
+                    var resp = await res.text()
+                    cache.set('uptime', resp)
+                    if (resp.includes('offline')) {
+                        setIsLive(false)
+                    } else {
+                        setIsLive(true)
+                    }
+                }
             } else {
-                var resp = await res.text()
-                cache.set('uptime', resp)
-                if (resp.includes('offline')) {
+                if (cachedUptime?.includes('offline')) {
                     setIsLive(false)
                 } else {
                     setIsLive(true)
                 }
             }
-        } else {
-            if (cachedUptime?.includes('offline')) {
-                setIsLive(false)
-            } else {
-                setIsLive(true)
-            }
-        }
-
     }
-
-    uptimeData()
+    useEffect(() => {
+        uptimeData()
+    }, [])
     return isLive
 }
 
@@ -55,8 +55,10 @@ export function useTitle(): string | undefined {
             setTitle(cachedTitle)
         }
     }
-
-    titleData()
+    
+    useEffect(() => {
+        titleData()
+    }, [])
     return title
 }
 
@@ -79,6 +81,8 @@ export function useGameName(): string {
         }
     }
 
-    gameNameData()
+    useEffect(() => {
+        gameNameData()
+    })
     return gameName
 }

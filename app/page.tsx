@@ -1,10 +1,7 @@
 'use client'
-import { useState, useEffect } from 'react';
 import { useTimeTicker } from "./counter/counter";
 import { useFormatter } from "./counter/timerFormat";
 import { useGameName, useLive, useTitle } from "./external Data/streamInfo";
-
-
 
 export default function Counter() {
   const linkProperties = {
@@ -18,55 +15,42 @@ export default function Counter() {
   const isLive = useLive()
   const game = useGameName()
 
-  const localDate = stream.date.toLocal();
-
-  // const [title, setTitle] = useState<string | JSX.Element | undefined>(<></>)
-  // const [timer, setTimer] = useState<string | JSX.Element | undefined>(<></>)
-
-  // const updateTitle = async () => {
-  //   if (await isLive) {
-  //     setTitle(`Come watch us play ${game}`)
-  //   } else {
-  //     setTitle(<div><span>on:</span><br/>{localDate.toFormat("LLL dd', at' t ZZZZ")}<br/><span>(local time)</span></div>)
-  //   }
-  // }
-
-  // const updateTimer = async () => {
-  //   if (await isLive) {
-  //     setTimer(await streamTitle)
-  //   } else {
-  //     setTimer(<div><span>Next stream is in:</span><br/>{time}</div>)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     updateTitle()
-  //     updateTimer()
-  //   }, 5*1000*60)
-
-  //   return () => clearInterval(interval)
-  // }, [])
+  const localTime = stream.date.toLocal()
 
   return (
-    <div>
-      <div className="wrapper">
-        <div className="bgIMG" />
-        <div className="timer">
-          {isLive? streamTitle : `Next stream is in ${time}`}
+    <div className="bg-logo bg-center bg-no-repeat bg-contain" id="bg">
+    <div className="h-screen w-screen flex flex-col justify-center items-center bg-solidGray bg-center bg-no-repeat bg-opacity-90" id="wrapper">
+      <div className="flex flex-col flex-grow justify-center items-center m-2 px-2 border-4 md:border-6 border-white w-full " id="info">
+        <div className="text-center text-6xl md:text-8xl xl:text-veryLarge pb-10 font-dinBold drop-shadow-mid" id="timer">
+              <span className="text-6xl md:text-8xl flex-grow-1" id="label">
+                {isLive?
+                      streamTitle : 
+                      isSpecial? 
+                        "Special stream is in:" : 
+                        "Next stream is in:"
+                }<br/>
+                </span>
+                {time}
         </div>
-        <div>
-          {isLive? `Come watch us play ${game}` : `on: ${localDate.toFormat("LLL dd', at' t ZZZ")} (local time)`}
+        <div className="text-center text-4xl font-dinRegular pb-2 md:text-5xl xl:text-7xl flex flex-grow-2" id="timer">
+        <span className="drop-shadow-close">
+          {isLive? 
+            `Come watch us play ${game}` : 
+            <>on:<br/>{localTime.toFormat("LLL dd', at' t ZZZZ")}<br/>(local time)</>}
+            </span>
         </div>
-        <div>
-          <a href="https://www.twitch.tv/secretsleepoversociety" {...linkProperties} title="Secret Sleepover Society Twitch Page">twitch.tv/<wbr/>secret<wbr/>sleepover<wbr/>society</a>
+        <div className="text-center font-dinRegular text-2xl pt-4 md:text-3xl xl:text-4xl flex flex-grow-2" id="twitchLink">
+          <a className="drop-shadow-close" href="https://www.twitch.tv/secretsleepoversociety" {...linkProperties} title="Secret Sleepover Society Twitch Page">twitch.tv/<wbr/>secret<wbr/>sleepover<wbr/>society</a>
         </div>
       </div>
-      <div className="footer">
-        <a href="https://twitter.com/floabcomic" {...linkProperties} title="Jacob's twitter profile">@FLoaBComic</a> ||
-        <a href="https://twitter.com/julialepetit" {...linkProperties} title="Julia's twitter profile">@JuliaLepetit</a> ||
-        <a href="https://twitter.com/sss_stream" {...linkProperties} title="SSS' twitter profile">@sss_stream</a> ||
+      <div className="mt-auto xl:mt-0 w-full">
+      <footer className="text-center text-xs xl:text-lg font-dinRegular bg-accentRed" id="footer">
+        <a href="https://twitter.com/floabcomic" {...linkProperties} title="Jacob's twitter profile"> @FLoaBComic</a> ||
+        <a href="https://twitter.com/julialepetit" {...linkProperties} title="Julia's twitter profile"> @JuliaLepetit</a> ||
+        <a href="https://twitter.com/sss_stream" {...linkProperties} title="SSS' twitter profile"> @sss_stream</a>
+      </footer>
       </div>
+    </div>
     </div>
   )
 }

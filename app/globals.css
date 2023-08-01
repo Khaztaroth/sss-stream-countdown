@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "D-DIN condensed";
+  src: url('../public/fonts/d-dincondensed.woff');
+}
+@font-face {
+  font-family: "D-DIN bold";
+  src: url('../public/fonts/d-dincondensed-bold.woff');
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -17,11 +26,6 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: rgb(255,255,255);
+  background: rgb(53, 53, 53);
 }
