@@ -9,13 +9,13 @@ export default function Counter() {
     rel: "noreferrer"
   }
 
-  const [isSpecial, stream] = useTimeTicker()
-  const time = useFormatter(stream.time)
+  const streamInfo = useTimeTicker()
+  const time = useFormatter(streamInfo.time)
   const streamTitle = useTitle()
   const isLive = useLive()
   const game = useGameName()
 
-  const localTime = stream.date.toLocal()
+  const localTime = streamInfo.date.toLocal()
 
   return (
     <div className="bg-logo bg-center bg-no-repeat bg-contain" id="bg">
@@ -25,7 +25,7 @@ export default function Counter() {
               <span className="text-6xl md:text-8xl flex-grow-1" id="label">
                 {isLive?
                       streamTitle : 
-                      isSpecial? 
+                      streamInfo.isSpecial? 
                         "Special stream is in:" : 
                         "Next stream is in:"
                 }<br/>
@@ -44,7 +44,7 @@ export default function Counter() {
         </div>
       </div>
       <div className="mt-auto xl:mt-0 w-full">
-      <footer className="text-center text-xs xl:text-lg font-dinRegular bg-accentRed" id="footer">
+      <footer className="text-center text-xs xl:text-lg font-dinRegular bg-accentRed text-black" id="footer">
         <a href="https://twitter.com/floabcomic" {...linkProperties} title="Jacob's twitter profile"> @FLoaBComic</a> ||
         <a href="https://twitter.com/julialepetit" {...linkProperties} title="Julia's twitter profile"> @JuliaLepetit</a> ||
         <a href="https://twitter.com/sss_stream" {...linkProperties} title="SSS' twitter profile"> @sss_stream</a>

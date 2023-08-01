@@ -5,9 +5,10 @@ export type StreamInfo = {
     stream: string,
     time: Duration,
     date: DateTime,
+    isSpecial: boolean,
   }
 
-export function useTimeTicker(): [boolean, StreamInfo] {
+export function useTimeTicker(): StreamInfo {
     const inNY = {zone: "America/New_York"}
     const [nowInNY, setNowInNY] = useState(DateTime.local(inNY))
 
@@ -49,34 +50,32 @@ export function useTimeTicker(): [boolean, StreamInfo] {
             return {
                 stream: 'special stream',
                 time: timeUntilStream.special,
-                date: nextStreamDate.special
+                date: nextStreamDate.special,
+                isSpecial: true
             }
         } else if (timeUntilStream.wed.days >=0 && timeUntilStream.wed.hours >= -1) {
             return {
                 stream: 'Wednesday stream',
                 time: timeUntilStream.wed,
-                date: nextStreamDate.wed
+                date: nextStreamDate.wed,
+                isSpecial: false
             }
         } else if (timeUntilStream.sun.days >=0 && timeUntilStream.sun.hours >= -1) {
             return {
                 stream: 'Sunday stream',
                 time: timeUntilStream.sun,
-                date: nextStreamDate.sun
+                date: nextStreamDate.sun,
+                isSpecial: false
             }
         } else {
             return {
                 stream: 'Next Wednesday stream',
                 time: timeUntilStream.nextWed,
-                date: nextStreamDate.nextWed
+                date: nextStreamDate.nextWed,
+                isSpecial: false
             }
         }
     }
 
-    function isSpecial(): boolean {
-        if (timeUntilStream.special.days >=0) {
-            return true
-        } else return false
-    }
-
-    return [isSpecial(), nextStream()]
+    return nextStream()
 }
