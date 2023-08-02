@@ -35,6 +35,15 @@ module.exports = {
         '2': '2',
         '3': '3',
         '4': '4',
+      },
+      animation: {
+        fade: 'fadeIn 0.5s ease-in forwards'
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: 0, backgroundColor: "rgba(25, 25, 25, 0)" },
+          '100%': { opacity: 1, backgroundColor: "rgba(25, 25, 25, 1)" },
+        }
       }
     },
   },

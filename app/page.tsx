@@ -19,6 +19,9 @@ export default function Counter() {
 
   return (
     <div className="bg-logo bg-center bg-no-repeat bg-contain" id="bg">
+    <div className="w-11 overflow-hidden inline-block top-[-20] right-0 fixed">
+      <div className="h-16 -rotate-45 transform origin-top-left hover:animate-fade"></div>
+    </div>  
     <div className="h-screen w-screen flex flex-col justify-center items-center bg-solidGray bg-center bg-no-repeat bg-opacity-90" id="wrapper">
       <div className="flex flex-col flex-grow justify-center items-center m-2 px-2 border-4 md:border-6 border-white w-full " id="info">
         <div className="text-center text-6xl md:text-8xl xl:text-veryLarge font-dinBold flex flex-col flex-grow-1 pt-4 md:pt-6 mb-10 sm:mb-20 drop-shadow-mid" id="timer">
