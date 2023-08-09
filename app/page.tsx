@@ -17,6 +17,10 @@ export default function Counter() {
 
   const localTime = streamInfo.date.toLocal()
 
+  var label = isLive? streamTitle : streamInfo.isSpecial? "Special stream in:" : "Next stream is in:"
+  var timer = isLive? <></> : time
+  var localTimer = isLive? `Come watch us play ${game}` : <>on<br/>{localTime.toFormat("LLL dd', at' t ZZZZ")}<br/>(local time)</>
+
   return (
     <div className="bg-logo bg-center bg-no-repeat bg-contain" id="bg">
     <div className="flex-grow-2"></div>
@@ -24,21 +28,15 @@ export default function Counter() {
       <div className="flex flex-col flex-grow justify-center items-center m-2 px-2 border-4 md:border-6 border-white w-full " id="info">
         <div className="text-center text-8xl md:text-8xl xl:text-veryLarge font-dinBold flex flex-col flex-grow-1 pt-4 md:pt-6 mb-10 sm:mb-6 xl:mb-5 drop-shadow-mid" id="timer">
               <span className="mt-10 md:mt-0 2xl:mt-16 pb-10 md:pb-0 text-5xl md:text-7xl xl:text-8xl" id="label">
-                {isLive?
-                      streamTitle : 
-                      streamInfo.isSpecial? 
-                        "Special stream is in:" : 
-                        "Next stream is in:"
-                }<br/>
-                </span>
-                {time}
+                {label}
+              </span>
+              <br/>
+                {timer}
         </div>
         <div className="text-center text-5xl font-dinRegular pb-4 xl:pb-12 md:text-6xl xl:text-8xl flex flex-grow-1" id="localTimer">
-        <span className="drop-shadow-close">
-          {isLive? 
-            `Come watch us play ${game}` : 
-            <>on:<br/>{localTime.toFormat("LLL dd', at' t ZZZZ")}<br/>(local time)</>}
-            </span>
+          <span className="drop-shadow-close">
+            {localTimer}
+          </span>
         </div>
         <div className="text-center font-dinRegular text-2xl pt-4 md:text-4xl xl:text-5xl flex flex-grow-1" id="twitchLink">
           <a className="drop-shadow-close" href="https://www.twitch.tv/secretsleepoversociety" {...linkProperties} title="Secret Sleepover Society Twitch Page">twitch.tv/<wbr/>secret<wbr/>sleepover<wbr/>society</a>
