@@ -36,7 +36,7 @@ export function useTimeTicker(): StreamInfo {
         wed: DateTime.fromFormat(`${nextDate.wed.month}/${nextDate.wed.day}/${nextDate.wed.year}, 9:00 PM`, 'f', inNY),
         sun: DateTime.fromFormat(`${nextDate.sun.month}/${nextDate.sun.day}/${nextDate.sun.year}, 9:00 PM`, 'f', inNY),
         nextWed: DateTime.fromFormat(`${nextDate.nextWed.month}/${nextDate.nextWed.day}/${nextDate.nextWed.year}, 9:00 PM`, 'f', inNY),
-        special:  DateTime.fromFormat('12/01/2023, 10:00 AM', 'f', inNY)
+        special:  DateTime.fromFormat('12/15/2023, 10:00 AM', 'f', inNY)
     }
     const timeUntilStream = {
         wed: nextStreamDate.wed.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
