@@ -60,13 +60,13 @@ export function useTimeTicker(): StreamInfo {
                 date: nextStreamDate.wed,
                 isSpecial: false
             }
-        // } else if (timeUntilStream.sun.days >=0 && timeUntilStream.sun.hours >= -1) {
-        //     return {
-        //         stream: 'Sunday stream',
-        //         time: timeUntilStream.sun,
-        //         date: nextStreamDate.sun,
-        //         isSpecial: false
-        //     }
+        } else if (timeUntilStream.sun.days >=0 && timeUntilStream.sun.hours >= -1) {
+            return {
+                stream: 'Sunday stream',
+                time: timeUntilStream.sun,
+                date: nextStreamDate.sun,
+                isSpecial: false
+            }
         } else {
             return {
                 stream: 'Next Wednesday stream',
