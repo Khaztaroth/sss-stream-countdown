@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DateTime, Duration } from 'luxon';
+import { useActiveDays } from '../external Data/activeDays';
 
 export type StreamInfo = {
     stream: string,
@@ -8,10 +9,29 @@ export type StreamInfo = {
     isSpecial: boolean,
   }
 
+  export class Days extends Object {
+        wed?: boolean;
+        sun?: boolean;
+        nextWed?: boolean;
+  }
+
+  function ParseDaysData() {
+    const activeDays = useActiveDays()
+
+    if (activeDays !== '') {
+        return JSON.parse(activeDays)
+    } else {
+        return 
+    }
+}
+
+
 export function useTimeTicker(): StreamInfo {
     const inNY = {zone: "America/New_York"}
     const [nowInNY, setNowInNY] = useState(DateTime.local(inNY))
 
+    const activeDays: Days = ParseDaysData()
+    
     useEffect(() => {
         const interval = setInterval(() => {
             setNowInNY(DateTime.local(inNY));
@@ -53,20 +73,20 @@ export function useTimeTicker(): StreamInfo {
                 date: nextStreamDate.special,
                 isSpecial: true
             }
-        } else if (timeUntilStream.wed.days >=0 && timeUntilStream.wed.hours >= -1) {
+        } else if (activeDays?.wed === true && timeUntilStream.wed.days >=0 && timeUntilStream.wed.hours >= -1) {
             return {
                 stream: 'Wednesday stream',
                 time: timeUntilStream.wed,
                 date: nextStreamDate.wed,
                 isSpecial: false
             }
-        // } else if (timeUntilStream.sun.days >=0 && timeUntilStream.sun.hours >= -1) {
-        //     return {
-        //         stream: 'Sunday stream',
-        //         time: timeUntilStream.sun,
-        //         date: nextStreamDate.sun,
-        //         isSpecial: false
-        //     }
+        } else if (activeDays?.sun === true && timeUntilStream.sun.days >=0 && timeUntilStream.sun.hours >= -1) {
+            return {
+                stream: 'Sunday stream',
+                time: timeUntilStream.sun,
+                date: nextStreamDate.sun,
+                isSpecial: false
+            }
         } else {
             return {
                 stream: 'Next Wednesday stream',

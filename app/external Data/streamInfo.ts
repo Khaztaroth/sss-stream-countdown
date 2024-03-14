@@ -13,7 +13,7 @@ export function useLive(): boolean{
             if (cachedUptime === undefined) {
                 const res = await fetch(`https://decapi.me/twitch/uptime/${channel}`, {next: {revalidate: 300}})
                 if (!res.ok) {
-                    throw new Error('Failed to fecth uptime data')
+                    throw new Error('Failed to fetch uptime data')
                 } else {
                     var resp = await res.text()
                     cache.set('uptime', resp)
@@ -70,7 +70,7 @@ export function useGameName(): string {
         if (cachedGameName === undefined) {
             const res = await fetch(`https://decapi.me/twitch/game/${channel}`, {next: {revalidate: 300}})
             if (!res.ok) {
-                throw new Error('Failed to fecth game data')
+                throw new Error('Failed to fetch game data')
             } else {
                 var resp = await res.text()
                 cache.set('gameName', resp)

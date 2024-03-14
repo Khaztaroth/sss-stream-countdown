@@ -3,6 +3,9 @@ import { useTimeTicker } from "./counter/counter";
 import { useFormatter } from "./counter/timerFormat";
 import { useGameName, useLive, useTitle } from "./external Data/streamInfo";
 
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 export default function Counter() {
   const linkProperties = {
     target: "blank",
