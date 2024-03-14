@@ -8,7 +8,7 @@ if (typeof window !== 'undefined'){
 }
 
 export default function Dashboard () {
-    const pass = params.get('pass')
+    const pass = params?.get('pass')
 
     const [wed, setWed] = useState(true)
     const [sun, setSun] = useState(true)
