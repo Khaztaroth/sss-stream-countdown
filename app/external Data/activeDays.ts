@@ -9,7 +9,7 @@ export function useActiveDays(): string {
 
     async function daysData() {
         if (cachedActiveDays === undefined) {
-            const res = await fetch('/external/dayConfig', {next: {revalidate: 600}})
+            const res = await fetch('https://sss-timer-dashboard.khaz.workers.dev/dash', {next: {revalidate: 600}})
             if (!res.ok) {
                 throw new Error('Failed to fetch days data')
             } else {

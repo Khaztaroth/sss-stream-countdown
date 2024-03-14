@@ -27,7 +27,7 @@ export default function Dashboard () {
     }
 
     const addDays = () => {
-        fetch("/external/dayConfig", {
+        fetch("https://sss-timer-dashboard.khaz.workers.dev/dash", {
             method: "POST",
             body: JSON.stringify({
                 days,

@@ -1,4 +1,6 @@
+
 const nextConfig = {
+    output: 'export',
     reactStrictMode: true,
     async rewrites() {
         return [
