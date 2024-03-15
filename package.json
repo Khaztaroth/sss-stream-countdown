@@ -12,7 +12,9 @@
     "deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static"
   },
   "dependencies": {
+    "luxon": "^3.4.4",
     "next": "14.1.0",
+    "node-cache": "^5.1.2",
     "react": "^18",
     "react-dom": "^18"
   },
