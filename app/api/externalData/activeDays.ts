@@ -11,7 +11,7 @@ export function useActiveDays(): string {
         if (cachedActiveDays === undefined) {
             const res = await fetch('/external/dayConfig', {next: {revalidate: 300}})
             if (!res.ok) {
-                throw new Error('Failed to fecth game data')
+                throw new Error('Failed to fecth days data')
             } else {
                 var resp = await res.text()
                 cache.set('days', resp)
