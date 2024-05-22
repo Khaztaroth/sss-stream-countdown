@@ -22,7 +22,7 @@ export function useFormatter(timeDiff: Duration) {
     } else if (timeDiff.seconds > 0) {
         return (
            timeDiff.toFormat(
-            `s ${timeDiff.seconds < 1 ? 'second' : 'seconds'}`
+            `s ${timeDiff.seconds < 2 ? "'s'econ'd'" : "'s'econ'ds'"}`
            )
         )
     } else if (timeDiff.seconds < 0 && timeDiff.seconds > -3600) {
