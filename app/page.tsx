@@ -19,9 +19,10 @@ export default function Counter() {
 
   const localTime = streamInfo.date.toLocal()
 
-  var label = isLive? streamTitle : streamInfo.isSpecial? "Special stream in:" : "Next stream is in:"
+  var label = isLive? streamTitle : streamInfo.isVacation? "Gone fishing!" : streamInfo.isSpecial? "Special stream in:" : "Next stream is in:"
   var timer = isLive? <></> : time
-  var localTimer = isLive? `Come watch us play ${game}` : <>on<br/>{localTime.toFormat("LLL dd', at' t ZZZZ")}<br/>(local time)</>
+  var vacationTimer = ["We're hoping to be back on", <br key={"break"}/>, localTime.toFormat("LLL dd', at' t ZZZZ"), "(local time)"];
+  var localTimer = isLive? `Come watch us play ${game}` : <><br/>on {localTime.toFormat("LLL dd', at' t ZZZZ")}<br/>(local time)</>
 
   return (
     <div className="bg-logo bg-center bg-no-repeat bg-contain" id="bg">
@@ -33,11 +34,11 @@ export default function Counter() {
                 {label}
               </span>
               <br/>
-                {timer}
+                {streamInfo.isVacation? '' : timer }
         </div>
         <div className="text-center text-5xl font-dinRegular pb-4 xl:pb-12 md:text-6xl xl:text-8xl flex flex-grow-1" id="localTimer">
           <span className="drop-shadow-close">
-            {localTimer}
+            {streamInfo.isVacation? vacationTimer : localTimer}
           </span>
         </div>
         <div className="text-center font-dinRegular text-2xl pt-4 md:text-4xl xl:text-5xl flex flex-grow-1" id="twitchLink">

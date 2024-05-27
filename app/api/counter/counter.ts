@@ -7,13 +7,15 @@ export type StreamInfo = {
     time: Duration,
     date: DateTime,
     isSpecial: boolean,
+    isVacation?: boolean;
   }
 
   export class Days extends Object {
         wed?: boolean;
         sun?: boolean;
         nextWed?: boolean;
-        special?: string
+        special?: string;
+        vacation?: string;
   }
 
 function ParseDaysData() {
@@ -32,6 +34,7 @@ export function useTimeTicker(): StreamInfo {
 
     const activeDays: Days = ParseDaysData()
     const specialSchedule:string | undefined = activeDays?.special || ''
+    const vacation:string | undefined = activeDays?.vacation || ''
         
     useEffect(() => {
         const interval = setInterval(() => {
@@ -57,43 +60,62 @@ export function useTimeTicker(): StreamInfo {
         wed: DateTime.fromFormat(`${nextDate.wed.month}/${nextDate.wed.day}/${nextDate.wed.year}, 9:00 PM`, 'f', inNY),
         sun: DateTime.fromFormat(`${nextDate.sun.month}/${nextDate.sun.day}/${nextDate.sun.year}, 9:00 PM`, 'f', inNY),
         nextWed: DateTime.fromFormat(`${nextDate.nextWed.month}/${nextDate.nextWed.day}/${nextDate.nextWed.year}, 9:00 PM`, 'f', inNY),
-        special:  DateTime.fromISO(specialSchedule).setZone(inNY.zone)
+        special:  DateTime.fromISO(specialSchedule).setZone(inNY.zone),
+        vacation: DateTime.fromISO(`${vacation}T21:00:00.000-04:00`).setZone(inNY.zone)
     }
-    const timeUntilStream = {
+    const timeUntil = {
         wed: nextStreamDate.wed.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
         sun: nextStreamDate.sun.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
         nextWed: nextStreamDate.nextWed.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
         special: nextStreamDate.special.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds']),
+        vacation: nextStreamDate.vacation.diff(nowInNY, ['days', 'hours', 'minutes', 'seconds'])
     }
 
+    console.log("Vacation",  vacation)
+    console.log("Vac date", nextStreamDate.vacation)
+    console.log("Vac time", timeUntil.vacation)
+
     function nextStream(): StreamInfo {
-        if (timeUntilStream.special.days >=0 && timeUntilStream.special.hours >= -1) {
+        if (!activeDays?.wed && !activeDays?.sun && !activeDays?.nextWed) {
+            return {
+                stream: 'Gone Fishing',
+                time: timeUntil.vacation,
+                date: nextStreamDate.vacation,
+                isSpecial: false,
+                isVacation: true,
+                }
+        }
+        else if (timeUntil.special.days >=0 && timeUntil.special.hours >= -1) {
             return {
                 stream: 'special stream',
-                time: timeUntilStream.special,
+                time: timeUntil.special,
                 date: nextStreamDate.special,
-                isSpecial: true
+                isSpecial: true,
+                isVacation: false,
             }
-        } else if (activeDays?.wed === true && timeUntilStream.wed.days >=0 && timeUntilStream.wed.hours >= -1) {
+        } else if (activeDays?.wed === true && timeUntil.wed.days >=0 && timeUntil.wed.hours >= -1) {
             return {
                 stream: 'Wednesday stream',
-                time: timeUntilStream.wed,
+                time: timeUntil.wed,
                 date: nextStreamDate.wed,
-                isSpecial: false
+                isSpecial: false,
+                isVacation: false,
             }
-        } else if (activeDays?.sun === true && timeUntilStream.sun.days >=0 && timeUntilStream.sun.hours >= -1) {
+        } else if (activeDays?.sun === true && timeUntil.sun.days >=0 && timeUntil.sun.hours >= -1) {
             return {
                 stream: 'Sunday stream',
-                time: timeUntilStream.sun,
+                time: timeUntil.sun,
                 date: nextStreamDate.sun,
-                isSpecial: false
+                isSpecial: false,
+                isVacation: false,
             }
         } else {
             return {
                 stream: 'Next Wednesday stream',
-                time: timeUntilStream.nextWed,
+                time: timeUntil.nextWed,
                 date: nextStreamDate.nextWed,
-                isSpecial: false
+                isSpecial: false,
+                isVacation: false,
             }
         }
     }
